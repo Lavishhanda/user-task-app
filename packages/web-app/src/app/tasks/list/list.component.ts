@@ -35,8 +35,8 @@ export class ListComponent {
   }
 
   onAddTask(): void {
-    // TODO: navigate to add task
-    throw new Error('Not implemented');
+    this.router.navigate(['add'])
+    // TODO: navigate to add task;
   }
 
   private getTaskList(): void {

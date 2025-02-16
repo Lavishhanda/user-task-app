@@ -5,6 +5,10 @@
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" />
     </mat-form-field>
+    <mat-error *ngIf="addTaskForm.get('title')?.invalid && (addTaskForm.get('title')?.dirty || addTaskForm.get('title')?.touched)">
+      <span *ngIf="addTaskForm.get('title')?.errors?.['required']">Title is required.</span>
+      <span *ngIf="addTaskForm.get('title')?.errors?.['minlength']">Title must be at least 10 characters.</span>
+    </mat-error>
     <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea rows="4" matInput formControlName="description"> </textarea>
@@ -21,6 +25,16 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="scheduledDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-error *ngIf="addTaskForm.get('scheduledDate')?.invalid && (addTaskForm.get('scheduledDate')?.dirty || addTaskForm.get('scheduledDate')?.touched)">
+      <span *ngIf="addTaskForm.get('scheduledDate')?.errors?.['dateOutOfRange']">{{addTaskForm.get('scheduledDate')?.errors?.['dateOutOfRange'].message}}</span>
+    </mat-error>
     <div class="action-button-row">
       <button
         data-testid="add-task"

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Task, TaskPriority } from '@take-home/shared';
 import { StorageService } from '../../storage/storage.service';
 import { faker } from '@faker-js/faker';
+import { addDays } from '../../../../../shared/src/lib/date-calculations';
+import { dateRangeValidator } from '../../../../../shared/src/lib/custom-validations';
 
 @Component({
     selector: 'take-home-add-component',
@@ -12,10 +14,9 @@ import { faker } from '@faker-js/faker';
     standalone: false
 })
 export class AddComponent {
+  
   protected addTaskForm: FormGroup = new FormGroup({
-    title: new FormControl(null, {
-      // TODO: add validators for required and min length 10
-    }),
+    title: new FormControl(null, [Validators.required,Validators.minLength(10)]),
     description: new FormControl(null),
     priority: new FormControl(
       { value: TaskPriority.MEDIUM, disabled: false },
@@ -23,27 +24,35 @@ export class AddComponent {
         validators: Validators.required,
       },
     ),
+    scheduledDate : new FormControl(null,[dateRangeValidator()])
   });
   protected priorities = Object.values(TaskPriority);
 
-  constructor(private storageService: StorageService, private router: Router) {}
+  constructor(private storageService: StorageService, private router: Router) {
+  }
 
-  onSubmit() {
+  async onSubmit() {
     const newTask: Task = {
       ...this.addTaskForm.getRawValue(),
       uuid: faker.string.uuid(),
       isArchived: false,
+      scheduledDate : this.addTaskForm.get('scheduledDate')?.value,
       // TODO: allow user to set scheduled date using MatDatePicker
-      scheduledDate: new Date(),
     };
+    await this.storageService.addTaskItem(newTask);
+    await this.storageService.updateTaskItem(newTask);
 
+    this.router.navigate(['']);
     // TODO: save updated task to storage
     // TODO: navigate to home page
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
   }
 
   onCancel(): void {
+    this.router.navigate(['']);
     // TODO: navigate to home page
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
   }
+
+  
 }
