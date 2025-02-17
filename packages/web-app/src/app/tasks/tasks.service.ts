@@ -51,7 +51,6 @@ export class TasksService {
         'title'
       ]
     });
-    console.log(search)
     if (search) {
       // fuse search
       this.tasks = fuse.search(search.toLowerCase()).map((task) => task.item);
