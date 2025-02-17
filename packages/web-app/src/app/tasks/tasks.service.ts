@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task, TaskPriority } from '@take-home/shared';
 import { StorageService } from '../storage/storage.service';
+import Fuse from 'fuse.js';
+
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
@@ -43,13 +45,23 @@ export class TasksService {
     }
   }
 
-  searchTask(search: string): void {
+   searchTask(search: string): void {
+    const fuse = new Fuse(this.tasks, {
+      keys : [
+        'title'
+      ]
+    });
+    console.log(search)
     if (search) {
-      // TODO: filter tasks which title include search value
-      throw new Error('Not implemented');
+      // fuse search
+      this.tasks = fuse.search(search.toLowerCase()).map((task) => task.item);
+      // regular seach
+      //this.tasks = this.tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
+      //throw new Error('Not implemented');
     } else {
+      this.storageService.getTasks().then((tasks) => this.tasks = tasks);
       // TODO: reload all tasks from storage
-      throw new Error('Not implemented');
+      //throw new Error('Not implemented');
     }
   }
 }

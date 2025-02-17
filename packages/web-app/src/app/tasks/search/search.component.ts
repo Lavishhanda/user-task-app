@@ -14,6 +14,10 @@ export class SearchComponent {
     search: new FormControl(null),
   });
 
+  getSearchForm(): FormGroup {
+    return this.searchForm;
+  }
+
   constructor(private taskService: TasksService) {
     this.searchForm.controls['search'].valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
