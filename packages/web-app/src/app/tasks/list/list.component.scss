@@ -1,6 +1,11 @@
 .container {
   justify-content: space-around;
 
+  h1,h3{
+    font-family :Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+  }
+
   .action-button-row {
     display: flex;
     justify-content: flex-start;
@@ -13,14 +18,20 @@
     margin: 5px;
     width: min(calc(100vw - var(--layout-padding)), var(--layout-width-max));
     gap: var(--layout-gap-size);
+    padding: 10px;
 
     mat-card {
       padding: var(--layout-padding);
+      border: 2px solid gray;
+      border-radius: 10px;
       &.complete {
         background-color: var(--success-color);
       }
       .high-priority {
         color: var(--error-color);
+      }
+      mat-card-title{
+        padding-left:10px;
       }
     }
   }

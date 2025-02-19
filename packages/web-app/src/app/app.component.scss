@@ -2,6 +2,7 @@
   min-height: 100vh;
   height: max(100%, 100vh);
   display: flex;
-  width: 100vw;
+  //remove horizontal scroll with 100vw width
+  //width: 100vw;
   justify-content: center;
 }
