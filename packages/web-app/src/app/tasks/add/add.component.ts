@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Task, TaskPriority } from '@take-home/shared';
 import { StorageService } from '../../storage/storage.service';
 import { faker } from '@faker-js/faker';
-import { addDays } from '../../../../../shared/src/lib/date-calculations';
 import { dateRangeValidator } from '../../../../../shared/src/lib/custom-validations';
 
 @Component({
@@ -42,14 +41,14 @@ export class AddComponent {
     await this.storageService.addTaskItem(newTask);
     await this.storageService.updateTaskItem(newTask);
 
-    this.router.navigate(['']);
+    this.router.navigateByUrl('/');
     // TODO: save updated task to storage
     // TODO: navigate to home page
     //throw new Error('Not implemented');
   }
 
   onCancel(): void {
-    this.router.navigate(['']);
+    this.router.navigateByUrl('/');
     // TODO: navigate to home page
     //throw new Error('Not implemented');
   }
