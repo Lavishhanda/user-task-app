@@ -11,7 +11,6 @@ export function dateRangeValidator(): ValidatorFn {
     dateValue.setHours(0, 0, 0, 0);
     const minDate = new Date();
     minDate.setHours(0, 0, 0, 0); 
-    console.log(dateValue,minDate)
     const maxDate = addDays(minDate, 7);
 
     if (dateValue < minDate || dateValue > maxDate) {
