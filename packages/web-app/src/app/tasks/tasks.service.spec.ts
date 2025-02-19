@@ -102,7 +102,15 @@ describe('TasksService', () => {
       expect(service.tasks.length).toEqual(1);
     });
 
-    it.todo('should filter task by scheduledDate key');
+    it('should filter task by scheduledDate key', () => {
+      const today = new Date();
+      service.tasks = [
+        generateTask({ title: 'Take home assignment', scheduledDate : new Date() }),
+        generateTask({ title: 'Thank you for your time', scheduledDate : new Date(2025,3,3) }),
+      ];
+      service.filterTask('scheduledDate');
+      expect(service.tasks.length).toEqual(1);
+    });
   });
 
   describe('searchTask', () => {
@@ -125,5 +133,5 @@ describe('TasksService', () => {
     });
 
     it.todo('should search task list for a fuzzy match on title');
-  });
+  }); 
 });

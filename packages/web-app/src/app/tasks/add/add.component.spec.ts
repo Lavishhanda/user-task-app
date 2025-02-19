@@ -12,8 +12,13 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Router } from '@angular/router';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 class MockStorageService {
+  addTaskItem(): void {
+    return;
+  }
   updateTaskItem(): void {
     return;
   }
@@ -37,6 +42,8 @@ describe('AddComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule   
       ],
       declarations: [AddComponent],
       providers: [{ provide: StorageService, useClass: MockStorageService }],

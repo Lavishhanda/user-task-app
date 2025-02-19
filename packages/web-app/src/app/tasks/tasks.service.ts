@@ -46,16 +46,16 @@ export class TasksService {
   }
 
    searchTask(search: string): void {
-    const fuse = new Fuse(this.tasks, {
-      keys : [
-        'title'
-      ]
-    });
+    // const fuse = new Fuse(this.tasks, {
+    //   keys : [
+    //     'title'
+    //   ]
+    // });
     if (search) {
       // fuse search
-      this.tasks = fuse.search(search.toLowerCase()).map((task) => task.item);
+      //this.tasks = fuse.search(search.toLowerCase()).map((task) => task.item);
       // regular seach
-      //this.tasks = this.tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
+      this.tasks = this.tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
       //throw new Error('Not implemented');
     } else {
       this.storageService.getTasks().then((tasks) => this.tasks = tasks);
