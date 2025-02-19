@@ -8,9 +8,9 @@ export function dateRangeValidator(): ValidatorFn {
     }
 
     const dateValue = new Date(control.value);
-    //dateValue.setHours(0, 0, 0, 0);
+    dateValue.setHours(0, 0, 0, 0);
     const minDate = new Date();
-    //minDate.setHours(0, 0, 0, 0); 
+    minDate.setHours(0, 0, 0, 0); 
     console.log(dateValue,minDate)
     const maxDate = addDays(minDate, 7);
 

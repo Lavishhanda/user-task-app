@@ -44,13 +44,11 @@ export class AddComponent {
     this.router.navigateByUrl('/');
     // TODO: save updated task to storage
     // TODO: navigate to home page
-    //throw new Error('Not implemented');
   }
 
   onCancel(): void {
     this.router.navigateByUrl('/');
     // TODO: navigate to home page
-    //throw new Error('Not implemented');
   }
 
   

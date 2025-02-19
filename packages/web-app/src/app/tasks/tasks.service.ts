@@ -34,33 +34,32 @@ export class TasksService {
         this.tasks  = this.tasks.filter((task) => task.priority === TaskPriority.HIGH);
         break;
         // TODO: add fitler for taks with High Priority
-        //throw new Error('Not implemented');
       case 'scheduledDate':
         this.tasks = this.tasks.filter((task) => new Date(task.scheduledDate).getDate() === new Date().getDate());
         break;
         // TODO: add fitler for tasks Due Today
-        //throw new Error('Not implemented');
       case 'completed':
         this.tasks = this.tasks.filter((task) => !task.completed);
     }
   }
 
-   searchTask(search: string): void {
-    // const fuse = new Fuse(this.tasks, {
+   async searchTask(search: string): Promise<void>{
+// const fuse = new Fuse(this.tasks, {
     //   keys : [
     //     'title'
     //   ]
     // });
     if (search) {
+      await this.getTasksFromStorage();
       // fuse search
       //this.tasks = fuse.search(search.toLowerCase()).map((task) => task.item);
       // regular seach
-      this.tasks = this.tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
-      //throw new Error('Not implemented');
+      const filteredTasks = this.tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
+        this.tasks.length = 0; 
+        this.tasks.push(...filteredTasks); 
     } else {
-      this.storageService.getTasks().then((tasks) => this.tasks = tasks);
+      await this.getTasksFromStorage();
       // TODO: reload all tasks from storage
-      //throw new Error('Not implemented');
     }
   }
 }

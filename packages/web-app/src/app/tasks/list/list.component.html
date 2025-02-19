@@ -1,11 +1,13 @@
 <div class="container">
   <h1>My Daily Tasks</h1>
   <h3>Total Tasks: {{ tasksService.tasks.length }}</h3>
-  <take-home-filters-component></take-home-filters-component>
+  <div class="search-n-filter">
+    <take-home-filters-component></take-home-filters-component>
   <take-home-search-component></take-home-search-component>
+  </div>
   <div class="action-button-row">
-    <button data-testid="add-task" mat-button (click)="onAddTask()">
-      Add Task
+    <button mat-flat-button data-testid="add-task" color="accent" (click)="onAddTask()">
+       <mat-icon>queue</mat-icon>Add Task
     </button>
   </div>
   <div class="tasks">
@@ -19,7 +21,9 @@
           {{ item.description }}
         </mat-card-content>
         <mat-card-footer *ngIf="item.priority === 'HIGH'">
-          <span class="high-priority">{{ item.priority }}</span>
+          <span class="high-priority"><button mat-raised-button color="warn">
+            <mat-icon>warning</mat-icon> {{item.priority}} 
+        </button></span>
         </mat-card-footer>
         <mat-card-actions *ngIf="item.uuid !== '1' && item.uuid !== '2'">
           <button
@@ -32,6 +36,7 @@
             <mat-icon>done</mat-icon>Done
           </button>
           <button
+            class="delete-btn"
             data-testid="delete-task"
             color="warn"
             mat-flat-button
