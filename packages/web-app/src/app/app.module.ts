@@ -74,6 +74,7 @@ const routes: Route[] = [
     MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,

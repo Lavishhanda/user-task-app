@@ -1,6 +1,12 @@
 .container {
   justify-content: space-around;
 
+  h1{
+    text-align: center;
+    font-family :Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+  }
+
   form {
     display: inline-flex;
     flex-direction: column;

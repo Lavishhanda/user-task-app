@@ -1,6 +1,24 @@
 .container {
   justify-content: space-around;
 
+  h1{
+    font-family :Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  h3{
+    font-family :Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+  }
+
+  .search-n-filter{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .action-button-row {
     display: flex;
     justify-content: flex-start;
@@ -13,14 +31,39 @@
     margin: 5px;
     width: min(calc(100vw - var(--layout-padding)), var(--layout-width-max));
     gap: var(--layout-gap-size);
+    padding: 10px;
 
     mat-card {
       padding: var(--layout-padding);
+      border: 2px solid gray;
+      border-radius: 10px;
       &.complete {
         background-color: var(--success-color);
       }
       .high-priority {
         color: var(--error-color);
+      }
+      mat-card-title{
+        text-align: center;
+      }
+      mat-card-content{
+        margin-top:10px
+      }
+      mat-card-footer{
+        padding-top: 10px;
+        .high-priority{
+          margin:20px;
+          font-family: inherit;
+        }
+      }
+      mat-card-actions{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        .delete-btn{
+          left:10px;
+        }
       }
     }
   }
