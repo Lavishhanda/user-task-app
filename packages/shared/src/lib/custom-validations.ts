@@ -6,14 +6,17 @@ export function dateRangeValidator(): ValidatorFn {
     if (!control.value) {
       return null;
     }
-    const minDate = new Date();
-    const maxDate = addDays(minDate, 7);
-    const dateValue = control.value;
-    const today = new Date(dateValue).getDate();
 
-    if (dateValue < minDate || dateValue > maxDate ) {
-      return { dateOutOfRange: {message : "Date cannot be more than 7 days from now"} };
+    const dateValue = new Date(control.value);
+    dateValue.setHours(0, 0, 0, 0);
+    const minDate = new Date();
+    minDate.setHours(0, 0, 0, 0); 
+    const maxDate = addDays(minDate, 7);
+
+    if (dateValue < minDate || dateValue > maxDate) {
+      return { dateOutOfRange: { message: 'Date cannot be before today or more than 7 days from now' } };
     }
+
     return null;
   };
 }
