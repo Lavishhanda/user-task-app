@@ -1,3 +1,9 @@
+All the instructions remain the same to start the project.
+
+I tried completing all the tasks but the task remaining for the fuzzy search test case. 
+Thank you for your time.
+
+
 # Technician's Tasks - Take Home Assignment
 
 ## Introduction
