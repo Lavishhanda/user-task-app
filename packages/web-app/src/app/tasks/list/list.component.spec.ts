@@ -35,7 +35,7 @@ class MockTasksService {
     return Promise.resolve(fakeTasks);
   }
   filterTask(): void {
-    return; 
+    return;
   }
 }
 
@@ -143,23 +143,30 @@ describe("ListComponent", () => {
     deleteButton.click();
     fixture.detectChanges();
     expect(component.onDeleteTask).toHaveBeenCalledTimes(1);
-    console.log(tasksService.tasks);
     expect(tasksService.tasks[0].isArchived).toBe(true);
   });
 
   it(`should not display archived tasks after deleting them`, async () => {
-    jest.spyOn(component, "onDeleteTask"); 
+    jest
+      .spyOn(tasksService, "getTasksFromStorage")
+      .mockImplementation(async () => {
+        tasksService.tasks = tasksService.tasks.filter(
+          (task) => !task.isArchived
+        );
+      });
+    tasksService.filterTask("isArchived");
     let matCards = fixture.nativeElement.querySelectorAll("mat-card");
-    //console.log(tasksService.tasks);
+
     // Get all the delete buttons
     const deleteButtons = await loader.getAllHarnesses(
       MatButtonHarness.with({ selector: '[data-testid="delete-task"]' })
     );
+
     for (const button of deleteButtons) {
       await button.click();
     }
+
     fixture.detectChanges();
-    //console.log(tasksService.tasks);
     matCards = fixture.nativeElement.querySelectorAll("mat-card");
     expect(matCards.length).toBe(0);
   });

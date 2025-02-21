@@ -52,11 +52,19 @@ export class TasksService {
     if (search) {
       await this.getTasksFromStorage();
       // fuse search
-      //this.tasks = fuse.search(search.toLowerCase()).map((task) => task.item);
+      //const fuse = new Fuse(this.tasks, {
+        //   keys: ["title"],
+        // });
+    
+        // const fuseFiltered = fuse
+        //   .search(search.toLowerCase())
+        //   .map((task) => task.item);
+    
+        // this.tasks = fuseFiltered;
+
       // regular seach
       const filteredTasks = this.tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
-        this.tasks.length = 0; 
-        this.tasks.push(...filteredTasks); 
+        this.tasks = filteredTasks; 
     } else {
       await this.getTasksFromStorage();
       // TODO: reload all tasks from storage
