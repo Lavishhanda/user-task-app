@@ -1,7 +1,10 @@
 All the instructions remain the same to start the project.
 
-I tried completing all the tasks but the task remaining for the fuzzy search test case. 
-Thank you for your time.
+1) All the optional were also implemented and fuse search is commented out in tasks.service.ts file in the async searchTask() function. 
+2) All when you see the test cases, it will say all the test cases pass but the last test case in tasks.service.spec.ts was the fuzzy search which is not implemented as I couldn't resolve a bunch of issues in it even after trying a lot. 
+ 
+Thank you for your time and this test. 
+
 
 
 # Technician's Tasks - Take Home Assignment
